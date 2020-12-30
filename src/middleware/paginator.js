@@ -1,34 +1,32 @@
 import { errorResponse } from '../helpers';
-import { User } from '../models';
 
-const jwt = require('jsonwebtoken');
+function paginator(model) {
+  return async (req, res, next) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 25;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
 
-const paginator = async (req, res, next) => {
-  if (!(req.headers && req.headers['x-token'])) {
-    return errorResponse(req, res, 'Token is not provided', 401);
-  }
-  const token = req.headers['x-token'];
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    req.user = decoded.user;
-    const user = await User.scope('withSecretColumns').findOne({
-      where: { email: req.user.email },
-    });
-    if (!user) {
-      return errorResponse(req, res, 'User is not found in system', 401);
+    const result = {};
+
+    if (endIndex < model.length) {
+      result.next = {
+        page: page + 1,
+        limit,
+      };
     }
-    const reqUser = { ...user.get() };
-    reqUser.userId = user.id;
-    req.user = reqUser;
-    return next();
-  } catch (error) {
-    return errorResponse(
-      req,
-      res,
-      'Incorrect token is provided, try re-login',
-      401,
-    );
-  }
-};
+    if (startIndex > 0) {
+      result.previous = {
+        page: page - 1,
+        limit,
+      };
+    }
+    const allData = await model.findAll();
+    result.results = allData.slice(startIndex, endIndex);
+
+    res.locals.paginatedResult = result;
+    next();
+  };
+}
 
 export default paginator;

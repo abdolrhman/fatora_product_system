@@ -1,6 +1,9 @@
 import express from 'express';
 
 import * as productController from '../controllers/product/product.controller';
+import paginator from '../middleware/paginator';
+import { product } from '../models';
+
 
 const router = express.Router();
 
@@ -9,6 +12,7 @@ const router = express.Router();
 //= ===============================
 router.get(
   '/',
+  paginator(product),
   productController.listProducts,
 );
 
