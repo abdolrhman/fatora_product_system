@@ -26,6 +26,12 @@ Once you clone or download project go into you folder
 > npm install or yarn install  (this will install all dependent libraries)
 ```
 
+### pagination
+```
+for pagination middleware, the param is the model name 
+> paginator(model)
+and i receive the page and the limit from the request uri
+```
 
 ### Success Response
 ```
