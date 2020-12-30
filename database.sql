@@ -19,7 +19,6 @@ create table products
 	id int auto_increment
 		primary key,
 	name varchar(45) null,
-	price decimal(20,2) null,
 	image_uri varchar(255) null,
 	createdAt datetime not null,
 	updatedAt datetime not null,
@@ -43,6 +42,8 @@ create table providers
 
 create table product_providers
 (
+	`double` double null,
+	available tinyint(1) null,
 	createdAt datetime not null,
 	updatedAt datetime not null,
 	productId int not null,
