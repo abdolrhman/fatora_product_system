@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => sequelize.define('product', {
   name: {
     type: DataTypes.STRING(45),
   },
+  price: {
+    type: DataTypes.DECIMAL(20, 2),
+  },
   image_uri: {
     type: DataTypes.STRING(255),
   },
