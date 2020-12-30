@@ -1,4 +1,4 @@
-# Express-Sequelize-API boilerplate
+# Simple product system -fatoraTask-
 This is a simple ecommercy project a proof of concept for creating APIs with NodeJs express framework.
 - list all products in a given category,
 a product's price should be the lowest available among its possible providers,
