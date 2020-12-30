@@ -43,16 +43,16 @@ db.Sequelize = Sequelize;
 // db.Address.belongsTo(db.User);
 
 db.category.hasMany(db.product, {
-  foreignKey: 'categoryId'
-})
+  foreignKey: 'categoryId',
+});
 
 db.product.belongsToMany(db.provider, {
-  through: 'product_providers'
-})
+  through: 'product_providers',
+});
 
 db.provider.belongsToMany(db.product, {
-  through: 'product_providers'
-})
+  through: 'product_providers',
+});
 
 //= ==============================
 // Auto create the tables

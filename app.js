@@ -20,7 +20,7 @@ app.use(
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/api', apiMiddleware, apiRoutes);
+app.use('/product', apiRoutes);
 app.use(errorHandler);
 
 module.exports = app;
