@@ -16,4 +16,10 @@ router.get(
   productController.listProducts,
 );
 
+router.get(
+  '/:id',
+  productController.featureProduct,
+);
+
+
 module.exports = router;
