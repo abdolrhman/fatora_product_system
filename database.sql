@@ -20,6 +20,8 @@ create table products
 		primary key,
 	name varchar(45) null,
 	image_uri varchar(255) null,
+	price double null,
+	featured tinyint(1) default 0 null,
 	createdAt datetime not null,
 	updatedAt datetime not null,
 	categoryId int null,
@@ -42,7 +44,6 @@ create table providers
 
 create table product_providers
 (
-	`double` double null,
 	available tinyint(1) null,
 	createdAt datetime not null,
 	updatedAt datetime not null,
